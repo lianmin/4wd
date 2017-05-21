@@ -16,7 +16,7 @@ app.use(xtpl({
   extname: 'xtpl',
   commands: {}
 }))
-app.use(koaStatic(__dirname + '../dist'));
+app.use(koaStatic(path.resolve(__dirname, '../../dist')));
 app.use(route.get('/test', robotRoute._4wd))
 
 // logger
@@ -65,4 +65,6 @@ io.on('connection', (socket) => {
 });
 
 
-server.listen(3000);
+server.listen(3000, () => {
+	console.log('done')
+});
