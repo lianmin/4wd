@@ -1,0 +1,49 @@
+{
+  "name": "4wd",
+  "version": "1.0.0",
+  "description": "a raspberry 4wd app based on koa",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/www",
+    "prd": "pm2 start bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lianmin/4wd.git"
+  },
+  "keywords": [
+    "raspberry",
+    "koa",
+    "4wd"
+  ],
+  "author": "山河",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lianmin/4wd/issues"
+  },
+  "homepage": "https://github.com/lianmin/4wd#readme",
+  "dependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "koa": "^2.2.0",
+    "koa-route": "^3.2.0",
+    "koa-router": "^7.1.1",
+    "koa-xtpl": "^2.0.0",
+    "rpio": "^0.9.16",
+    "socket.io": "^2.0.1",
+    "koa-websocket": "^4.0.0",
+    "ws": "^2.3.1"
+  },
+  "devDependencies": {
+    "debug": "^2.6.6",
+    "koa-bodyparser": "^4.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^2.0.1",
+    "koa-onerror": "^3.1.0",
+    "koa-static": "^3.0.0",
+    "koa-views": "^6.0.2",
+    "pug": "^2.0.0-rc.1"
+  }
+}
