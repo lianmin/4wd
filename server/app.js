@@ -12,7 +12,7 @@ app.use(logger())
 app.use(serve('static', path.resolve(__dirname, '../dist/')))
 
 // logger
-app.use(async(ctx, next) => {
+app.use(async (ctx, next) => {
   const start = new Date();
   await next();
   const ms = new Date() - start;
@@ -29,15 +29,12 @@ io.on('connection', (socket) => {
     console.log(chalk.yellow('socket.io ready'))
   })
 
-  socket.on('start', () => {
-    console.log(chalk.yellow('car started'))
-  })
-  socket.on('off', () => {
-    console.log(chalk.yellow('car stoped'))
+  socket.on('engine', (status) => {
+    console.log(chalk.yellow(`car engine: ${status}!`))
   })
 
-  socket.on('orient', (direction) => {
-    console.log(chalk.yellow('orient', direction))
+  socket.on('command', (direction) => {
+    console.log(chalk.yellow('command', direction))
   })
 });
 

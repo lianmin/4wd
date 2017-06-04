@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <h2>command: {{command}}</h2>
-    <p>timer:{{timer}}-{{counter}}</p>
-    <p>status: {{listenning}}</p>
+    <p>listenning: {{listenning}}</p>
     <p>orientation: {{alpha}}, {{beta}}, {{gamma}}</p>
     <button :class="{'listenning':listenning}"
             @touchstart="start"
@@ -14,8 +13,6 @@
 </template>
 
 <script>
-  const SLOPE_DEGREE = 20
-
   export default {
     name: 'app',
     data(){
@@ -28,9 +25,7 @@
         // orient beta
         beta: 0,
         // orient gamma
-        gamma: 0,
-        timer: 0,
-        counter: 0
+        gamma: 0
       }
     },
     computed: {
@@ -66,12 +61,12 @@
     methods: {
       start(){
         this.listenning = true
-        this.socket && this.socket.emit('start', '')
+        this.socket && this.socket.emit('engine', 'on')
         this.listen()
       },
       stop(){
         this.listenning = false
-        this.socket && this.socket.emit('off', '')
+        this.socket && this.socket.emit('engine', 'off')
         this.stopListen()
       },
       emit({alpha, beta, gamma}){
@@ -81,18 +76,17 @@
           return
         }
 
-        this.counter++
         _this.timer = window.setTimeout(() => {
           _this.timer = null
           _this.alpha = parseInt(alpha)
           _this.beta = parseInt(beta)
           _this.gamma = parseInt(gamma)
 
-          _this.socket && _this.socket.emit('orient', _this.command)
+          _this.socket && _this.socket.emit('command', _this.command)
         }, 200)
       },
       listen(){
-        window.addEventListener('deviceorientation', this.emit, false);
+        window.addEventListener('deviceorientation', this.emit, false)
       },
       stopListen(){
         window.removeEventListener('deviceorientation', this.emit)
